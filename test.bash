@@ -1,25 +1,20 @@
 #!/bin/bash
 # spdx-FileCopyrightText: 2025 hakozaki teruki
+ng (){
+    echo "${1}行目が違うよ"
+    res=1
+}
 
-output = $(echo "abc def" | ./count.py)
-expected = "6"
-if [ "$output" != "$expected" ]; then
-    echo "Test 1 failed: expected $expected, got $output"
-    exit 1
-fi
-output = $(echo -e " 12 34 " | ./count.py)
-expected = "4"
-if [ "$output" != "$expected" ]; then
-    echo "Test 2 failed: expected $expected, got $output"
-    exit 1
-fi
-output = $(echo -e "abc\ndef ghi" | ./count.py)
-expected = "3
-6"
-if [ "$output" != "$expected" ]; then
-    echo "Test 3 failed: expected '$expected', got '$output'"
-    exit 1
-fi
+res=0
 
-echo "All bash tests passed."
-exit 0
+out=$(echo "abc def" | ./count.py)
+[ "${out}" = 6 ] || ng "$LINENO"
+
+out=$(echo " 12 34 " | ./count.py)
+[ "${out}" = 4 ] || ng "$LINENO"
+
+out=$(echo -e "abc\ndef ghi" | ./count.py)
+[ "${out}" = $'3\n6' ] || ng "$LINENO"
+
+[ "${res}" = 0 ] && echo OK
+exit $res
