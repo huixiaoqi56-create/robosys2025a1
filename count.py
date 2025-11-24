@@ -2,6 +2,7 @@
 # spdx-FileCopyrightText: 2025 hakozaki teruki
 import sys
 
+
 def main():
     for line in sys.stdin:
         stripped = line.rstrip("\n")
