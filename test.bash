@@ -1,5 +1,6 @@
 #!/bin/bash
 # spdx-FileCopyrightText: 2025 hakozaki teruki
+# SPDX-License-Identifier: BSD-3-Clause
 ng (){
     echo "${1}行目が違うよ"
     res=1
