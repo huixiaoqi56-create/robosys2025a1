@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-# spdx-FileCopyrightText: 2025 hakozaki teruki
+# SPDX-FileCopyrightText: 2025 hakozaki teruki
+# SPDX-License-Identifier: BSD-3-Clause
 import sys
 
 
