@@ -14,11 +14,10 @@
 　- Ryuichi Ueda〔slidesrobosys2025〕
    - (https://github.com/ryuichiueda/slides_marp/tree/master/robosys2025)
 
+- ©　2025　hakozaki teruki
 ## 必要なソフトウェア
 - Python
   - テスト済みバージョン: 3.7~3.10
 
 ### テスト環境
 - Ubuntu 22.04 LTS
-
-©　2025　hakozaki teruki
