@@ -1,22 +1,60 @@
-# 文字数カウンター
-- [![test](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml/badge.svg)](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml) [![test](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml/badge.svg)](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml) [![test](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml/badge.svg)](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml) [![test](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml/badge.svg)](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml)
-- このプログラムは空白を無視して入力したテキストの文字数をカウントします。
+# 授業スケジュール表示コマンド
 
-- 使用方法
-  1. count.py を自身のUbuntuの作業環境にダウンロードし開く。
-  2. count.pyに実行権限を付与するために `$ chmod +x count.py` を実行する。
-  3. `$ ./count.py`　でプログラムを実行する。
-  4. 文字数を知りたいテキストを入力し、Enterキーを押すと文字数が表示される。
-  5. `Ctrl + c` で終了する。
 
-- このソフトウェアパッケージは、3条項BSDライセンスの下、再頒布および使用が許可されます．
-- このパッケージは、Ryuichi Ueda由来のコードを利用していてを本人の許可を得て自身の著作としたものです．
-- Ryuichi Ueda〔slidesrobosys2025〕(https://github.com/ryuichiueda/slides_marp/tree/master/robosys2025)
 
-- ©　2025　hakozaki teruki
+## 概要
+
+指定された曜日、または実行した日の曜日に対応する授業スケジュールとメモを表示する。
+
+- 標準入力あり：指定曜日を表示
+- 標準入力なし：今日の曜日を自動判定
+- `week` 指定：1週間（月〜日）の一覧を表示
+
+## 使用方法
+
+### 今日の授業を表示
+
+```bash
+./skj
+```
+
+### 曜日を指定して表示（パイプ入力）
+
+```bash
+echo monday | ./skj
+```
+
+### 1週間の一覧を表示
+
+```bash
+echo week | ./skj
+```
+
+### リダイレクト入力の例
+
+```bash
+printf "tuesday" > day.txt
+./skj < day.txt
+```
+
+## 動作の仕様
+
+- 入力は英語小文字（monday〜sunday, week）
+
 ## 必要なソフトウェア
-- Python
-  - テスト済みバージョン: 3.7~3.10
 
-### テスト環境
+- Python 3
+
+  - 動作確認済み: Python 3.7〜3.10
+
+## テスト環境
+
 - Ubuntu 22.04 LTS
+
+## ライセンス
+
+- このソフトウェアパッケージは、3条項BSDライセンスの下、再頒布および使用が許可されます。
+ - Ryuichi Ueda〔slidesrobosys2025〕(https://github.com/ryuichiueda/slides_marp/tree/master/robosys2025)
+
+© 2025 hakozaki teruki
+

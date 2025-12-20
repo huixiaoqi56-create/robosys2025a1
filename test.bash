@@ -1,6 +1,7 @@
 #!/bin/bash
 # spdx-FileCopyrightText: 2025 hakozaki teruki
 # SPDX-License-Identifier: BSD-3-Clause
+
 ng (){
     echo "${1}行目が違うよ"
     res=1
@@ -8,14 +9,45 @@ ng (){
 
 res=0
 
-out=$(echo "abc def" | ./count.py)
-[ "${out}" = 6 ] || ng "$LINENO"
+out=$(echo monday | ./skj.py)
+expected=$'1限: a\n2限: a\nメモ: a'
+[ "${out}" = "${expected}" ] || ng "$LINENO"
 
-out=$(echo " 12 34 " | ./count.py)
-[ "${out}" = 4 ] || ng "$LINENO"
+out=$(echo saturday | ./skj.py)
+[ "${out}" = "メモ: a" ] || ng "$LINENO"
 
-out=$(echo -e "abc\ndef ghi" | ./count.py)
-[ "${out}" = $'3\n6' ] || ng "$LINENO"
+out=$(echo sunday | ./skj.py)
+[ "${out}" = "メモ: a" ] || ng "$LINENO"
+
+out=$(echo holiday | ./skj.py 2>/dev/null)
+[ "$?" = 1 ] || ng "$LINENO"
+[ "${out}" = "" ] || ng "$LINENO"
+
+./skj.py >/dev/null 2>&1
+[ "$?" = 0 ] || ng "$LINENO"
+
+out=$(echo week | ./skj.py)
+
+first=$(echo "$out" | head -n 1)
+last=$(echo "$out" | grep -n sunday | cut -d: -f1)
+
+[ "${first}" = "monday" ] || ng "$LINENO"
+[ -n "${last}" ] || ng "$LINENO"
+
+count=$(echo "$out" | grep -cE '^(monday|tuesday|wednesday|thursday|friday|saturday|sunday)$')
+[ "${count}" = 7 ] || ng "$LINENO"
+
+bad=$(echo "$out" | grep -vE '^([[:space:]]{2,}.*|monday|tuesday|wednesday|thursday|friday|saturday|sunday)$')
+[ "${bad}" = "" ] || ng "$LINENO"
+
+
+empty=$(echo "$out" | grep -n '^$')
+[ "${empty}" = "" ] || ng "$LINENO"
+
+out=$(printf "tuesday\n" | ./skj.py)
+expected=$'1限: a\nメモ: a'
+[ "${out}" = "${expected}" ] || ng "$LINENO"
 
 [ "${res}" = 0 ] && echo OK
 exit $res
+
