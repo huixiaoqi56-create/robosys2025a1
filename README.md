@@ -54,7 +54,7 @@ printf "tuesday" > day.txt
 ```
 ### スケジュールの変更方法
 
-表示内容を変更する場合は、`skj` の`SCHEDULE` を書き換えてください。
+表示内容を変更する場合は、`skj` の`SCHEDULE`の"　"内 を書き換えてください。
 
 ```python
 SCHEDULE = {
@@ -63,7 +63,7 @@ SCHEDULE = {
         "2限: a",
         "メモ: a"
     ],
-
+```
 ## 動作の仕様
 
 - 入力は英語小文字（monday〜sunday, week）
