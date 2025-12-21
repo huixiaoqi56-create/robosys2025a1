@@ -17,9 +17,9 @@ jobs:
         with:
           python-version: ["3.7", "3.8", "3.9", "3.10"]
 
-      - name: test
-        run: chmod +x skj
+      - name: skj
+        run: chmod +x ./skj
 
       - name: Run bash tests
-        run: |
-          bash ./test.bash
+        run: bash ./test.bash
+
