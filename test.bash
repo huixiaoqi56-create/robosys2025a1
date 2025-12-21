@@ -1,5 +1,5 @@
 #!/bin/bash
-# spdx-FileCopyrightText: 2025 hakozaki teruki
+# SPDX-FileCopyrightText: 2025 hakozaki teruki
 # SPDX-License-Identifier: BSD-3-Clause
 
 ng (){
@@ -39,7 +39,6 @@ count=$(echo "$out" | grep -cE '^(monday|tuesday|wednesday|thursday|friday|satur
 
 bad=$(echo "$out" | grep -vE '^([[:space:]]{2,}.*|monday|tuesday|wednesday|thursday|friday|saturday|sunday)$')
 [ "${bad}" = "" ] || ng "$LINENO"
-
 
 empty=$(echo "$out" | grep -n '^$')
 [ "${empty}" = "" ] || ng "$LINENO"
