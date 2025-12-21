@@ -58,10 +58,13 @@ def print_week():
             print("  " + line)
 
 def main():
-    if sys.stdin.isatty():
-        key = today_weekday()
+    input_data = ""
+    if not sys.stdin.isatty():
+        input_data = sys.stdin.read().strip().lower()
+    if input_data:
+        key = input_data
     else:
-        key = sys.stdin.read().strip().lower()
+        key = today_weekday()
 
     if key == "week":
         print_week()
@@ -70,7 +73,6 @@ def main():
     else:
         print("Invalid input", file=sys.stderr)
         sys.exit(1)
-
 if __name__ == "__main__":
     main()
 
