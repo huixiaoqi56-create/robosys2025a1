@@ -52,6 +52,17 @@ echo week | ./skj
 printf "tuesday" > day.txt
 ./skj < day.txt
 ```
+### スケジュールの変更方法
+
+表示内容を変更する場合は、`skj` の`SCHEDULE` を書き換えてください。
+
+```python
+SCHEDULE = {
+    "monday": [
+        "1限: a",
+        "2限: a",
+        "メモ: a"
+    ],
 
 ## 動作の仕様
 
