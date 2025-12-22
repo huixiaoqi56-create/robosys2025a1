@@ -21,7 +21,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: skj
-        run: chmod +x ./skj.py
+        run: chmod +x ./skj
 
       - name: All test
         run: bash -xv ./test.bash

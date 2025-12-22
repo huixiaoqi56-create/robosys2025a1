@@ -1,4 +1,4 @@
-# スケジュール表示コマンド
+# スケジュール表示コマンドo
 
 
 
@@ -64,7 +64,7 @@ SCHEDULE = {
 
 - Python 3
 
-  - 動作確認済み: Python 3.8〜3.10
+  - 動作確認済みバージョン: Python 3.8〜3.10
 
 ## テスト環境
 
@@ -73,9 +73,6 @@ SCHEDULE = {
 ## ライセンス
 
 - このソフトウェアパッケージは、3条項BSDライセンスの下、再頒布および使用が許可されます。
-- 本プログラムの設計方針やテスト方法については，Ryuichi Ueda 氏による（slidesrobosys2025）の講義、資料を参考にしました。
- - Ryuichi Ueda
-  - 〔slidesrobosys2025〕(https://github.com/ryuichiueda/slides_marp/tree/master/robosys2025)
 
 © 2025 hakozaki teruki
 

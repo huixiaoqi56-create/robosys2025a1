@@ -9,24 +9,24 @@ ng (){
 
 res=0
 
-out=$(echo monday | ./skj.py)
+out=$(echo monday | ./skj)
 expected=$'1限: a\n2限: a\nメモ: a'
 [ "${out}" = "${expected}" ] || ng "$LINENO"
 
-out=$(echo saturday | ./skj.py)
+out=$(echo saturday | ./skj)
 [ "${out}" = "メモ: a" ] || ng "$LINENO"
 
-out=$(echo sunday | ./skj.py)
+out=$(echo sunday | ./skj)
 [ "${out}" = "メモ: a" ] || ng "$LINENO"
 
-out=$(echo holiday | ./skj.py 2>/dev/null)
+out=$(echo holiday | ./skj 2>/dev/null)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
 ./skj.py >/dev/null 2>&1
 [ "$?" = 0 ] || ng "$LINENO"
 
-out=$(echo week | ./skj.py)
+out=$(echo week | ./skj)
 
 first=$(echo "$out" | head -n 1)
 last=$(echo "$out" | grep -n sunday | cut -d: -f1)
@@ -43,7 +43,7 @@ bad=$(echo "$out" | grep -vE '^([[:space:]]{2,}.*|monday|tuesday|wednesday|thurs
 empty=$(echo "$out" | grep -n '^$')
 [ "${empty}" = "" ] || ng "$LINENO"
 
-out=$(printf "tuesday\n" | ./skj.py)
+out=$(printf "tuesday\n" | ./skj)
 expected=$'1限: a\nメモ: a'
 [ "${out}" = "${expected}" ] || ng "$LINENO"
 
