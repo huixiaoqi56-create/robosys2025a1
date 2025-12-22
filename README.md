@@ -47,7 +47,7 @@ echo week | ./skj
 
 #### スケジュールの変更方法
 
-使用する際に表示内容を変更、追加する場合は、`skj` の`SCHEDULE`内部の`"　"`内を書き換えてください。
+- 使用する際に表示内容を変更、追加する場合は、`skj` の`SCHEDULE`内部の`"　"`内を書き換えてください。
 
 ```python
 SCHEDULE = {
@@ -56,6 +56,39 @@ SCHEDULE = {
         "2限: a",
         "メモ: a"
     ],
+    "tuesday": [
+        "1限: a",
+        "メモ: a"
+    ],
+    "wednesday": [
+        "3限: a",
+        "メモ: a"
+    ],
+    "thursday": [
+        "2限: a",
+        "メモ: a"
+    ],
+    "friday": [
+        "1限: a",
+        "メモ: a"
+    ],
+    "saturday": [
+        "メモ: a"
+    ],
+    "sunday": [
+        "メモ: a"
+    ]
+}
+
+WEEKDAYS = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday"
+]
 ```
 ## 必要なソフトウェア
 
