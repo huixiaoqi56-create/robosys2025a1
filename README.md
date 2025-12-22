@@ -80,15 +80,6 @@ SCHEDULE = {
     ]
 }
 
-WEEKDAYS = [
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday",
-    "sunday"
-]
 ```
 ## 必要なソフトウェア
 
