@@ -23,7 +23,7 @@ out=$(echo holiday | ./skj 2>/dev/null)
 [ "$?" = 1 ] || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
-./skj.py >/dev/null 2>&1
+./skj >/dev/null 2>&1
 [ "$?" = 0 ] || ng "$LINENO"
 
 out=$(echo week | ./skj)
