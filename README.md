@@ -1,5 +1,5 @@
-# スケジュール表示コマンドo
-
+# スケジュール表示コマンド
+[![test](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml/badge.svg)](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml)
 
 
 ## 概要
