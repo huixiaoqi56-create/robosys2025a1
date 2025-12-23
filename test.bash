@@ -10,14 +10,17 @@ ng (){
 res=0
 
 out=$(echo monday | ./skj)
-expected=$'1限: a\n2限: a\nメモ: a'
+expected=$'1限: a\n2限: a\n3限: a\n4限: a\n5限: a\n6限: a\nメモ: a'
 [ "${out}" = "${expected}" ] || ng "$LINENO"
-
+out=$(echo tuesday | ./skj)
+expected=$'1限: b\n2限: a\n3限: a\n4限: a\n5限: a\n6限: a\nメモ: a'
+[ "${out}" = "${expected}" ] || ng "$LINENO"
 out=$(echo saturday | ./skj)
-[ "${out}" = "メモ: a" ] || ng "$LINENO"
-
+expected=$'1限: f\n2限: a\n3限: a\n4限: a\n5限: a\n6限: a\nメモ: a'
+[ "${out}" = "${expected}" ] || ng "$LINENO"
 out=$(echo sunday | ./skj)
-[ "${out}" = "メモ: a" ] || ng "$LINENO"
+expected=$'1限: g\n2限: a\n3限: a\n4限: a\n5限: a\n6限: a\nメモ: a'
+[ "${out}" = "${expected}" ] || ng "$LINENO"
 
 out=$(echo holiday | ./skj 2>/dev/null)
 [ "$?" = 1 ] || ng "$LINENO"
@@ -42,11 +45,6 @@ bad=$(echo "$out" | grep -vE '^([[:space:]]{2,}.*|monday|tuesday|wednesday|thurs
 
 empty=$(echo "$out" | grep -n '^$')
 [ "${empty}" = "" ] || ng "$LINENO"
-
-out=$(printf "tuesday\n" | ./skj)
-expected=$'1限: a\nメモ: a'
-[ "${out}" = "${expected}" ] || ng "$LINENO"
-
 [ "${res}" = 0 ] && echo OK
 exit $res
 
