@@ -1,7 +1,6 @@
 # スケジュール表示コマンド
 [![test](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml/badge.svg)](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml)
 
-
 ## 概要
 
 - 指定された曜日または実行した日の曜日に対応するスケジュールとメモもしくは1週間のスケジュールとメモの一覧を選んで表示するコマンド。
@@ -30,91 +29,26 @@ chmod +x skj
 #### 今日の曜日のスケジュールを表示
 
 ```bash
-./skj
+./skj < schedule.txt
 ```
 
 #### 曜日を指定して表示
 
 ```bash
-echo monday | ./skj
+./skj monday < schedule.txt
 ```
 
 #### 1週間の一覧を表示
 
 ```bash
-echo week | ./skj
+./skj week < schedule.txt
 ```
 
 #### スケジュールの変更方法
 
-- 使用する際に表示内容を変更、追加する場合は、`skj` の`SCHEDULE`内部の`[ ]`を書き換えてください。
+- 使用する際に表示内容を変更、追加する場合は、を書き換えてください。
 
-```python
-SCHEDULE = {
-    "monday": [
-        "1限: a",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "tuesday": [
-        "1限: b",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "wednesday": [
-        "1限: c",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "thursday": [
-        "1限: d",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "friday": [
-        "1限: e",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "saturday": [
-        "1限: f",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "sunday": [
-        "1限: g",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ]
-}
+```
 
 ```
 ## 必要なソフトウェア
