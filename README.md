@@ -29,8 +29,7 @@ chmod +x skj
 #### 今日の曜日のスケジュールを表示
 
 ```bash
-./skj < schedule.txt
-tuesday
+(echo today; cat schedule.txt) | ./skj
 1限: b
 2限: a
 3限: a
@@ -43,8 +42,7 @@ tuesday
 #### 曜日を指定して表示
 
 ```bash
-./skj monday < schedule.txt
-monday
+(echo monday; cat schedule.txt) | ./skj
 1限: a
 2限: a
 3限: a
@@ -57,7 +55,7 @@ monday
 #### 1週間の一覧を表示
 
 ```bash
-./skj week < schedule.txt
+(echo week; cat schedule.txt) | ./skj
 monday
 1限: a
 2限: a
