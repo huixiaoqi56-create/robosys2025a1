@@ -3,63 +3,71 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 import sys
-import datetime
+from datetime import datetime
 
-DAYS = [
-    "monday", "tuesday", "wednesday",
-    "thursday", "friday", "saturday", "sunday"
-]
 
-def parse_schedule(text):
+def parse_schedule(lines):
     schedule = {}
-    current = None
+    current_day = None
 
-    for line in text.splitlines():
-        line = line.rstrip()
+    for line in lines:
+        line = line.rstrip("\n")
         if not line:
             continue
-        if line in DAYS:
-            current = line
-            schedule[current] = []
-        elif current:
-            schedule[current].append(line)
-
+        if line.isalpha():
+            current_day = line.lower()
+            schedule[current_day] = []
+        else:
+            if current_day is not None:
+                schedule[current_day].append(line)
     return schedule
 
-def print_day(schedule, day):
-    for line in schedule.get(day, []):
-        print(line)
 
-def print_week(schedule):
-    for d in DAYS:
-        print(d)
-        for line in schedule.get(d, []):
-            print(f"  {line}")
+def show_day(schedule, day):
+    if day in schedule:
+        for item in schedule[day]:
+            print(item)
+
+
+def show_week(schedule):
+    for day in [
+        "monday", "tuesday", "wednesday",
+        "thursday", "friday", "saturday", "sunday"
+    ]:
+        if day in schedule:
+            print(day)
+            for item in schedule[day]:
+                print(f"  {item}")
+
 
 def main():
-    schedule_text = sys.stdin.read()
-    if not schedule_text.strip():
-        return 1
+    lines = sys.stdin.read().splitlines()
+    if not lines:
+        return
 
-    schedule = parse_schedule(schedule_text)
+    cmd = lines[0].strip().lower()
+    schedule_lines = lines[1:]
 
-    # 引数処理
-    if len(sys.argv) == 1:
-        # 今日
-        day = datetime.datetime.today().strftime("%A").lower()
+    schedule = parse_schedule(schedule_lines)
+
+    weekdays = {
+        "monday", "tuesday", "wednesday",
+        "thursday", "friday", "saturday", "sunday"
+    }
+
+    if cmd == "today":
+        today = datetime.now().strftime("%A").lower()
+        show_day(schedule, today)
+
+    elif cmd == "week":
+        show_week(schedule)
+
+    elif cmd in weekdays:
+        show_day(schedule, cmd)
+
     else:
-        day = sys.argv[1].lower()
-
-    if day == "week":
-        print_week(schedule)
-        return 0
-
-    if day in DAYS:
-        print_day(schedule, day)
-        return 0
-
-    return 1
+        pass  
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
