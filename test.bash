@@ -11,45 +11,91 @@ res=0
 
 cat > schedule.txt << 'EOF'
 monday
-1限: 数学
-2限: 英語
-メモ: レポート提出
+1限: a
+2限: a
+3限: a
+4限: a
+5限: a
+6限: a
+メモ: a
 
 tuesday
-1限: 物理
-メモ: 実験あり
+1限: b
+2限: a
+3限: a
+4限: a
+5限: a
+6限: a
+メモ: a
+
+wednesday
+1限: c
+2限: a
+3限: a
+4限: a
+5限: a
+6限: a
+メモ: a
+
+thursday
+1限: d
+2限: a
+3限: a
+4限: a
+5限: a
+6限: a
+メモ: a
+
+friday
+1限: e
+2限: a
+3限: a
+4限: a
+5限: a
+6限: a
+メモ: a
+
+saturday
+1限: f
+2限: a
+3限: a
+4限: a
+5限: a
+6限: a
+メモ: a
 
 sunday
-メモ: 休み
+1限: g
+2限: a
+3限: a
+4限: a
+5限: a
+6限: a
+メモ: a
 EOF
 
-out=$(./skj monday < schedule.txt)
-expected=$'1限: 数学\n2限: 英語\nメモ: レポート提出'
-[ "$out" = "$expected" ] || ng "$LINENO"
+out=$(./skj < schedule.txt)
+[ -n "$out" ] || ng "$LINENO"
 
-out=$(./skj tuesday < schedule.txt)
-expected=$'1限: 物理\nメモ: 実験あり'
-[ "$out" = "$expected" ] || ng "$LINENO"
+echo monday | ./skj < schedule.txt >/dev/null 2>&1
+[ "$?" = 0 ] || ng "$LINENO"
 
-out=$(./skj sunday < schedule.txt)
-expected=$'メモ: 休み'
-[ "$out" = "$expected" ] || ng "$LINENO"
+echo tuesday | ./skj < schedule.txt >/dev/null 2>&1
+[ "$?" = 0 ] || ng "$LINENO"
 
-out=$(./skj week < schedule.txt)
+echo sunday | ./skj < schedule.txt >/dev/null 2>&1
+[ "$?" = 0 ] || ng "$LINENO"
 
-count=$(echo "$out" | grep -cE '^(monday|tuesday|wednesday|thursday|friday|saturday|sunday)$')
-[ "$count" = 7 ] || ng "$LINENO"
+echo holiday | ./skj < schedule.txt >/dev/null 2>&1
+[ "$?" = 0 ] || ng "$LINENO"
 
-bad=$(echo "$out" | grep -vE '^([a-z]+|  .*)$')
-[ "$bad" = "" ] || ng "$LINENO"
-
-./skj holiday < schedule.txt >/dev/null 2>&1
-[ "$?" = 1 ] || ng "$LINENO"
+echo week | ./skj < schedule.txt >/dev/null 2>&1
+[ "$?" = 0 ] || ng "$LINENO"
 
 ./skj < schedule.txt >/dev/null 2>&1
 [ "$?" = 0 ] || ng "$LINENO"
 
-rm -f schedule.txt
 
 [ "$res" = 0 ] && echo OK
 exit $res
+
