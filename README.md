@@ -1,6 +1,5 @@
 # スケジュール表示コマンド
 [![test](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml/badge.svg)](https://github.com/huixiaoqi56-create/robosys2025a1/actions/workflows/test.yml)
-
 ## 概要
 
 - 指定された曜日または実行した日の曜日に対応するスケジュールとメモもしくは1週間のスケジュールとメモをテキストデータから抽出し出力するコマンド。
@@ -27,7 +26,7 @@ chmod +x skj
 - 以下の手順から選んで実行してください。
 
 #### 今日の曜日のスケジュールを表示
-
+- 火曜日の場合
 ```bash
 (echo today; cat schedule.txt) | ./skj
 1限: b
@@ -151,14 +150,15 @@ tuesday
 ```
 ## 必要なソフトウェア
 
-- Python
+- Python3
 
   - テスト済みバージョン: Python 3.8〜3.10
 
 ## テスト環境
 
-- Ubuntu 22.04 LTS
-- Linux
+- Ubuntu 22.04.5 LTS
+- GitHub Actions
+ - ubuntu-latest
 
 ## ライセンス
 
