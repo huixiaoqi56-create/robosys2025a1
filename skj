@@ -4,38 +4,105 @@
 
 import sys
 import datetime
-import yaml
 
-CONFIG = "schedule.yml"
+SCHEDULE = {
+    "monday": [
+        "1限: a",
+        "2限: a",
+        "3限: a",
+        "4限: a",
+        "5限: a",
+        "6限: a",
+        "メモ: a"
+    ],
+    "tuesday": [
+        "1限: b",
+        "2限: a",
+        "3限: a",
+        "4限: a",
+        "5限: a",
+        "6限: a",
+        "メモ: a"
+    ],
+    "wednesday": [
+        "1限: c",
+        "2限: a",
+        "3限: a",
+        "4限: a",
+        "5限: a",
+        "6限: a",
+        "メモ: a"
+    ],
+    "thursday": [
+        "1限: d",
+        "2限: a",
+        "3限: a",
+        "4限: a",
+        "5限: a",
+        "6限: a",
+        "メモ: a"
+    ],
+    "friday": [
+        "1限: e",
+        "2限: a",
+        "3限: a",
+        "4限: a",
+        "5限: a",
+        "6限: a",
+        "メモ: a"
+    ],
+    "saturday": [
+        "1限: f",
+        "2限: a",
+        "3限: a",
+        "4限: a",
+        "5限: a",
+        "6限: a",
+        "メモ: a"
+    ],
+    "sunday": [
+        "1限: g",
+        "2限: a",
+        "3限: a",
+        "4限: a",
+        "5限: a",
+        "6限: a",
+        "メモ: a"
+    ],
+}
 
-def load_schedule():
-    with open(CONFIG, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
-
-def today():
-    return datetime.datetime.today().strftime("%A").lower()
+def print_day(day: str):
+    for line in SCHEDULE[day]:
+        print(line)
 
 def main():
-    schedule = load_schedule()
+    data = sys.stdin.read()
 
-    if sys.stdin.isatty():
-        key = today()
-    else:
-        key = sys.stdin.read().strip()
+    if data == "":
+        today = datetime.datetime.today().strftime("%A").lower()
+        if today in SCHEDULE:
+            print_day(today)
+            return 0
+        return 1
 
-    if key == "week":
-        for d, items in schedule.items():
+    day = data.strip().lower()
+
+    if day == "week":
+        for d in [
+            "monday", "tuesday", "wednesday",
+            "thursday", "friday", "saturday", "sunday"
+        ]:
             print(d)
-            for s in items:
-                print("  " + s)
-        sys.exit(0)
+            for line in SCHEDULE[d]:
+                print(f"  {line}")
+        return 0
 
-    if key not in schedule:
-        print("Invalid input", file=sys.stderr)
-        sys.exit(1)
+    if day in SCHEDULE:
+        print_day(day)
+        return 0
 
-    for s in schedule[key]:
-        print(s)
+    return 1
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
