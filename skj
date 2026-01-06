@@ -5,100 +5,57 @@
 import sys
 import datetime
 
-SCHEDULE = {
-    "monday": [
-        "1限: a",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "tuesday": [
-        "1限: b",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "wednesday": [
-        "1限: c",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "thursday": [
-        "1限: d",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "friday": [
-        "1限: e",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "saturday": [
-        "1限: f",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-    "sunday": [
-        "1限: g",
-        "2限: a",
-        "3限: a",
-        "4限: a",
-        "5限: a",
-        "6限: a",
-        "メモ: a"
-    ],
-}
+DAYS = [
+    "monday", "tuesday", "wednesday",
+    "thursday", "friday", "saturday", "sunday"
+]
 
-def print_day(day: str):
-    for line in SCHEDULE[day]:
+def parse_schedule(text):
+    schedule = {}
+    current = None
+
+    for line in text.splitlines():
+        line = line.rstrip()
+        if not line:
+            continue
+        if line in DAYS:
+            current = line
+            schedule[current] = []
+        elif current:
+            schedule[current].append(line)
+
+    return schedule
+
+def print_day(schedule, day):
+    for line in schedule.get(day, []):
         print(line)
 
-def main():
-    data = sys.stdin.read()
+def print_week(schedule):
+    for d in DAYS:
+        print(d)
+        for line in schedule.get(d, []):
+            print(f"  {line}")
 
-    if data == "":
-        today = datetime.datetime.today().strftime("%A").lower()
-        if today in SCHEDULE:
-            print_day(today)
-            return 0
+def main():
+    schedule_text = sys.stdin.read()
+    if not schedule_text.strip():
         return 1
 
-    day = data.strip().lower()
+    schedule = parse_schedule(schedule_text)
+
+    # 引数処理
+    if len(sys.argv) == 1:
+        # 今日
+        day = datetime.datetime.today().strftime("%A").lower()
+    else:
+        day = sys.argv[1].lower()
 
     if day == "week":
-        for d in [
-            "monday", "tuesday", "wednesday",
-            "thursday", "friday", "saturday", "sunday"
-        ]:
-            print(d)
-            for line in SCHEDULE[d]:
-                print(f"  {line}")
+        print_week(schedule)
         return 0
 
-    if day in SCHEDULE:
-        print_day(day)
+    if day in DAYS:
+        print_day(schedule, day)
         return 0
 
     return 1

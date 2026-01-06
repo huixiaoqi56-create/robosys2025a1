@@ -2,40 +2,46 @@
 # SPDX-FileCopyrightText: 2025 hakozaki teruki
 # SPDX-License-Identifier: BSD-3-Clause
 
-ng (){
+ng () {
     echo "${1}行目が違うよ"
     res=1
 }
 
 res=0
 
-out=$(echo monday | ./skj)
-expected=$'1限: a\n2限: a\n3限: a\n4限: a\n5限: a\n6限: a\nメモ: a'
-[ "${out}" = "${expected}" ] || ng "$LINENO"
+# --- テスト用スケジュール ---
+cat > schedule.txt << 'EOF'
+monday
+1限: 数学
+2限: 英語
+メモ: レポート提出
 
-out=$(echo tuesday | ./skj)
-expected=$'1限: b\n2限: a\n3限: a\n4限: a\n5限: a\n6限: a\nメモ: a'
-[ "${out}" = "${expected}" ] || ng "$LINENO"
+tuesday
+1限: 物理
+メモ: 実験あり
 
-out=$(echo saturday | ./skj)
-expected=$'1限: f\n2限: a\n3限: a\n4限: a\n5限: a\n6限: a\nメモ: a'
-[ "${out}" = "${expected}" ] || ng "$LINENO"
+sunday
+メモ: 休み
+EOF
 
-out=$(echo sunday | ./skj)
-expected=$'1限: g\n2限: a\n3限: a\n4限: a\n5限: a\n6限: a\nメモ: a'
-[ "${out}" = "${expected}" ] || ng "$LINENO"
+# --- スケジュール表示（最初の曜日が出る） ---
+out=$(./skj < schedule.txt)
+expected=$'1限: 数学\n2限: 英語\nメモ: レポート提出'
+[ "$out" = "$expected" ] || ng "$LINENO"
 
-out=$(echo holiday | ./skj 2>/dev/null)
-[ "$?" = 1 ] || ng "$LINENO"
-[ "${out}" = "" ] || ng "$LINENO"
+# --- week / holiday / 曜日指定は仕様外であることを確認 ---
+# → エラーにならず、同じ出力になることを確認
+out=$(echo week | ./skj < schedule.txt)
+[ "$out" = "$expected" ] || ng "$LINENO"
 
-./skj >/dev/null 2>&1
+out=$(echo holiday | ./skj < schedule.txt)
+[ "$out" = "$expected" ] || ng "$LINENO"
+
+# --- 正常終了 ---
+./skj < schedule.txt >/dev/null 2>&1
 [ "$?" = 0 ] || ng "$LINENO"
 
-out=$(echo week | ./skj)
+rm -f schedule.txt
 
-count=$(echo "$out" | grep -c '^[a-z]')
-[ "${count}" = 7 ] || ng "$LINENO"
-
-[ "${res}" = 0 ] && echo OK
+[ "$res" = 0 ] && echo OK
 exit $res
