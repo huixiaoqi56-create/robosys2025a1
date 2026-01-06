@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2025 hakozaki teruki
 # SPDX-License-Identifier: BSD-3-Clause
-#!/usr/bin/env python3
-# SPDX-FileCopyrightText: 2025 hakozaki teruki
-# SPDX-License-Identifier: BSD-3-Clause
 
 import sys
 import datetime
